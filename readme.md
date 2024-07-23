@@ -47,6 +47,11 @@ docker run --name jenkins-blueocean --restart=on-failure --detach `
 ```
 docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ```
+### If you are unable to run the command above at once for whatever reason, run:
+```
+docker exec jenkins-blueocean bash
+```
+### to get into a shell in your container, then cat the file
 
 ## Connect to the Jenkins
 ```
@@ -55,6 +60,16 @@ https://localhost:8080/
 
 ## Installation Reference:
 https://www.jenkins.io/doc/book/installing/docker/
+
+## Accessing the file system of our jenkins server
+This is what you will do often time while working with jenkins especially when troubleshooting. 
+Run the command, ```docker exec -it jenkins-blueocean bash ``` to run a bash shell inside the container interactively.
+```
+cd /var/jenkins_home
+```
+This is the directory you provided in the 'volume' when you ran your jenkins container
+If you run ``` ls -ltra ``` you will see various folders including the **workspace** folder.
+In the workspace folder is a folder with the name of your job
 
 
 ## alpine/socat container to forward traffic from Jenkins to Docker Desktop on Host Machine
