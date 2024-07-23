@@ -61,6 +61,7 @@ https://localhost:8080/
 ## Installation Reference:
 https://www.jenkins.io/doc/book/installing/docker/
 
+
 ## Accessing the file system of our jenkins server
 This is what you will do often time while working with jenkins especially when troubleshooting. 
 Run the command, ```docker exec -it jenkins-blueocean bash ``` to run a bash shell inside the container interactively.
@@ -71,6 +72,18 @@ This is the directory you provided in the 'volume' when you ran your jenkins con
 If you run ``` ls -ltra ``` you will see various folders including the **workspace** folder.
 In the workspace folder is a folder with the name of your job
 
+
+## Create and execute a build job
+Visit the dashboard page of your jenkins UI and click on ***New Item***. Enter a name and select ***Freestyle project*** and click ***save***
+Select ***Configure*** in the next screen. Provide a description for the particular build. Under **Source Code Management, select ***Git***.
+Copy the is repository url and enter under ***Repository URL***. If it is a private repo ensure to provide your git credential.
+Under **Branches to build**, enter ```*/main``` or ```*/master``` depending on your naming. 
+Scroll down to ***Build Steps***, select ***Execute shell*** from the dropdown and enter the command, ```python3 helloworld.py```. 
+This will execute the helloworld.py script in the repo. To confirm the version of python installed in your jenkins server, you can run a bash shell in your container and enter ```python``` or ```python3``` Click ***save***.
+Click ***Build Now*** in the next screen.
+
+### Accessing Build History
+Click on the build number under ***Build History*** to access the build console and view result.
 
 ## alpine/socat container to forward traffic from Jenkins to Docker Desktop on Host Machine
 
